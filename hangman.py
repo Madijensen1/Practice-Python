@@ -173,4 +173,4 @@ def hangman():
 	
 hangman()
 
-	#stop the game when all the letters have been guessed correctly
+	
