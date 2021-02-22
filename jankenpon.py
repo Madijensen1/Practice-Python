@@ -1,5 +1,6 @@
+#play rock paper scissors against a friend in the command line
 
-
+#checks if player 1 wins
 def play1winner(play1, play2):
 	if play1 == 'rock':
 		if play2 == 'scissors':
@@ -13,7 +14,7 @@ def play1winner(play1, play2):
 		if play2 == 'paper':
 			print('player 1 wins!')
 			return True
-	
+#checks if player 2 wins	
 def play2winner(play1, play2):
 	if play2 == 'rock':
 		if play1 == 'scissors':
@@ -27,12 +28,12 @@ def play2winner(play1, play2):
 		if play1 == 'paper':
 			print('player 2 wins!')
 			return True
-
+#checks if tie
 def tie(play1, play2):
 	if play1 == play2:
 		print("its a tie!")
 
-
+#starts the game, keeps score of who wins
 def rps():
 	player1tally = 0
 	player2tally = 0
@@ -50,7 +51,7 @@ def rps():
 	
 	print('score - player 1 = ' + str(player1tally) + ' player 2 = ' + str(player2tally))
 
-
+#ask if wants to play again
 def play():	
 	rps()
 	again = input('play again? y or n - ')
