@@ -1,3 +1,4 @@
+#pulls a random word from a text file to use as the word to guess
 def randomword():
 	import random
 	wordlist = []
@@ -18,6 +19,7 @@ def randomword():
 
 	return wordsplit
 
+#creates the gameboard
 def gameboard(a):
 
 	gameboard = []
@@ -145,7 +147,7 @@ def printboard(buildinglist, remainingturns):
 	if remainingturns == 0:
 		turnsix(buildinglist)
 
-
+#starts the game, you have 6 lives to be able to guess the secret word. each wrong guess will print out a new hangman board
 def hangman():
 	used = []
 	remainingturns = 6
