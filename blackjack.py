@@ -5,6 +5,7 @@ values = {'Two':2, 'Three':3, 'Four':4, 'Five':5, 'Six':6, 'Seven':7, 'Eight':8,
 suits = ('Hearts', 'Diamonds', 'Spades', 'Clubs')
 ranks = ('Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace')
 
+#checks the value of a card
 def check_value(player):
 
 		cardlength = len(player.allcards)
@@ -15,6 +16,7 @@ def check_value(player):
 
 		return handsum
 
+#creates a card with a rank, suit, and value attached
 class Card:
 
 	def __init__(self,suit,rank):
@@ -26,6 +28,7 @@ class Card:
 	def __str__(self):
 		return self.rank + ' of ' + self.suit
 
+#creates a deck of 52 cards using the Card class
 class Deck:
 	
 	def __init__(self):
@@ -43,7 +46,7 @@ class Deck:
 	def dealone(self):
 		return self.allcards.pop()
 
-
+#sets up the player hand, creates ability to add cards to the hand and check the value
 class Player:
 
 	def __init__(self):
@@ -59,6 +62,7 @@ class Player:
 	def __str__(self):
 		return f"human has {len(self.allcards)} cards."
 
+#creates the dealers hand, creates ability to add cards to the hand and check the value
 class Dealer:
 
 	def __init__(self):
@@ -73,6 +77,7 @@ class Dealer:
 
 	def __str__(self):
 		return f"dealer has {len(self.allcards)} cards."
+
 
 class Blackjack:
 
@@ -91,6 +96,7 @@ class Blackjack:
 			self.human.addcard(self.usedeck.dealone())
 			self.dealer.addcard(self.usedeck.dealone())
 
+	#prints game without values added (like a true blackjack game, you can't see the value)
 	def printgame(self):
 		
 		humanlist = ""
@@ -103,7 +109,7 @@ class Blackjack:
 	
 		return 'dealer hand: ' + str(self.dealer.allcards[0]) + ", one hidden \nhuman hand: "+ humanlist
 	
-	
+	#prints game with values, easier to compare dealer vs player hand
 	def fullprintgame(self):
 		
 		humanlist = ""
@@ -117,6 +123,7 @@ class Blackjack:
 	
 		return 'dealer hand: ' + dealerlist + "dealer hand = " + str(self.dealer.handVal) + "\nhuman hand: "+ humanlist + "human hand = " + str(self.human.handVal)
 
+	#checks if the player has an ace, resets the value based on input
 	def aceplayer(self):
 		for rank in ranks:
 			if rank == 'Ace':
@@ -130,6 +137,7 @@ class Blackjack:
 						except:
 							print('not 1 or 11! try again ')
 
+	#checks if the player has gone bust
 	def checkbust(self,playerdealer):
 		if playerdealer.handVal > 21:
 			return False
@@ -137,6 +145,7 @@ class Blackjack:
 		else:
 			return True
 
+	#creates the loop of the players turn, adding a card to the hand if "hit", checking if bust and if they have an ace
 	def player_turn(self):
 
 		not_busted = True
@@ -158,7 +167,8 @@ class Blackjack:
 			
 			while 'hit' != turn != 'pass':
 				turn = input('Not right! pick one - hit or pass? ')
-
+	
+	#creates the dealers turn based on traditional dealer rules
 	def dealer_turn(self):
 
 		not_bust = True
@@ -185,8 +195,7 @@ class Blackjack:
 									not_bust = True
 			else:
 				break
-	
-
+	#function to check and return who wins
 	def who_win(self):
 
 		if self.checkbust(self.human) == False:
@@ -214,6 +223,7 @@ class Blackjack:
 			print('dealer bust, human wins!')
 			return 'human'
 
+		#return win counts
 	def wincount(self,winner):
 	
 		if winner == 'dealer':
@@ -223,6 +233,7 @@ class Blackjack:
 			self.humanwin += 1
 		print('game score: dealer - ' + str(self.dealerwin) + ' human - ' + str(self.humanwin))
 
+#creates betting system where you can place a bet before the round starts, then will divide the bet based on who won the last round
 class Betting():
 
 	def __init__(self,balance = 0,table = 0):
@@ -262,7 +273,7 @@ class Betting():
 	def __str__(self):
 		return 'wallet total: $' + str(self.balance)
 
-
+#checks if player wants to continue with current game
 def playagain(gamebet):
 	if gamebet.balance == 0:
 		print('no funds left, game over')
@@ -274,7 +285,7 @@ def playagain(gamebet):
 	else:
 		return False
 
-
+#sets up entire game to be played from command line
 def playblackjack():
 	play = True
 	game = Blackjack()
